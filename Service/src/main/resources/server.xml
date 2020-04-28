@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="jdbcProps1">
+        <prop key="baza.jdbc.driver">org.sqlite.JDBC</prop>
+        <prop key="baza.jdbc.url">jdbc:sqlite:/D:/spersamearga.db</prop>
+    </util:properties>
+
+    <util:properties id="jdbcProps" location="classpath:serverdb.config"/>
+
+
+    <bean id="gameRepo" class="Repository.GameRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="ticketRepo" class="Repository.TicketRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="sellerRepo" class="Repository.SellerRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="gameService" class="Service.GameService">
+        <property name="repo" ref="gameRepo"/>
+    </bean>
+
+    <bean id="ticketService" class="Service.TicketService">
+        <property name="repo" ref="ticketRepo"/>
+    </bean>
+
+    <bean id="sellerService" class="Service.SellerService">
+        <property name="repo" ref="sellerRepo"/>
+    </bean>
+
+</beans>

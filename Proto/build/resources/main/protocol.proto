@@ -1,0 +1,52 @@
+syntax="proto3";
+package protocol;
+
+
+
+message Seller{
+  int32 id = 1;
+  string username=2;
+  string password=3;
+}
+
+message Ticket{
+  string client=1;
+  int32 nr=2;
+  int32 idgame=3;
+}
+
+message Game{
+  int32 id =1 ;
+  string homeTeam = 2;
+  string awayTeam = 3;
+  string type = 4;
+  int32 totalNr = 5;
+  int32 nrOfEmptySeats = 6;
+  float price = 7;
+}
+
+
+message Request {
+  enum Type { Login = 0; Logout = 1; SellTicket = 2; GetGames= 3 ;}
+
+  // Identifies which request is filled in.
+  Type type = 1;
+
+  // One of the following will be filled in, depending on the type.
+  Seller seller = 2;
+  Ticket ticket =3;
+}
+
+message Response{
+  enum Type { Ok = 0; Error = 1; GetGames=2; Refresh = 3;  }
+
+  // Identifies which request is filled in.
+  Type type = 1;
+
+  // One of the following will be filled in, depending on the type.
+  string error = 2;
+  repeated Game games=3;
+  Seller seller=4 ;
+  Game game = 5;
+
+}

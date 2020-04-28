@@ -1,0 +1,8 @@
+rootProject.name = 'ProtoJava'
+include 'ProtoJava'
+include 'Persistance'
+include 'Proto'
+include 'Client'
+include 'Service'
+include 'Network'
+
